@@ -1,0 +1,19 @@
+language: bash
+
+dist: xenial
+
+services:
+  - docker
+
+before_script:
+  # 登录到 docker hub
+  - echo "3401438abc" | docker login -u "gemmawu" --password-stdin
+
+script:
+  # 这里编写测试代码的命令
+  - echo "test code"
+
+after_success:
+  # 当代码测试通过后执行的命令
+  - docker build -t gemmawu/alpine .
+  - docker push gemmawu/alpine
